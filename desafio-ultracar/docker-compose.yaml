@@ -1,0 +1,13 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ultracar-db # Nome do banco de dados
+      POSTGRES_USER: marllon    # Nome de usuário
+      POSTGRES_PASSWORD: marllon123  # Senha do usuário
+    volumes:
+      - ./data:/var/lib/postgresql/data  # Volume para persistir os dados do banco de dados
+    ports:
+      - 5432:5432
