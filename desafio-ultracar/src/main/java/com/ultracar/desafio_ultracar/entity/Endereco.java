@@ -1,5 +1,6 @@
 package com.ultracar.desafio_ultracar.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class Endereco {
   private String estado;
   private String localidade;
 
+  @JsonIgnore
   @OneToOne(mappedBy = "endereco")
   private Cliente cliente; // O mapeamento correto
 }
