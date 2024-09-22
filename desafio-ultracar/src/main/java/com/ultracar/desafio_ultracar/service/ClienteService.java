@@ -3,7 +3,6 @@ import com.ultracar.desafio_ultracar.dto.ClienteDTO;
 import com.ultracar.desafio_ultracar.dto.EnderecoDTO;
 import com.ultracar.desafio_ultracar.entity.Cliente;
 import com.ultracar.desafio_ultracar.entity.Endereco;
-import com.ultracar.desafio_ultracar.entity.Veiculo;
 import com.ultracar.desafio_ultracar.exceptions.CpfDuplicadoException;
 import com.ultracar.desafio_ultracar.repository.ClienteRepository;
 import java.util.List;
