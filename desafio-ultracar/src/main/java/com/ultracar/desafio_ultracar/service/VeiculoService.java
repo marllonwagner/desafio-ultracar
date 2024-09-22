@@ -40,4 +40,18 @@ public class VeiculoService {
     }
     return null;
   }
+
+  public Veiculo updateVeiculo(Long id, VeiculoInfoDTO veiculoInfoDto) {
+    Veiculo veiculo = veiculoRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Veículo não encontrado"));
+    veiculo.setMarca(veiculoInfoDto.getMarca());
+    veiculo.setModelo(veiculoInfoDto.getModelo());
+    veiculo.setPlaca(veiculoInfoDto.getPlaca());
+    veiculo.setAno(veiculoInfoDto.getAno());
+    return veiculoRepository.save(veiculo);
+  }
+
+  public void deleteVeiculo(Long id) {
+    veiculoRepository.deleteById(id);
+  }
 }

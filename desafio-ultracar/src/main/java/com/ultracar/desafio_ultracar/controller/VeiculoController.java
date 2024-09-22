@@ -1,6 +1,7 @@
 package com.ultracar.desafio_ultracar.controller;
 
 import com.ultracar.desafio_ultracar.dto.VeiculoDTO;
+import com.ultracar.desafio_ultracar.dto.VeiculoInfoDTO;
 import com.ultracar.desafio_ultracar.entity.Veiculo;
 import com.ultracar.desafio_ultracar.service.VeiculoService;
 import java.util.List;
@@ -24,6 +25,19 @@ public class VeiculoController {
   public ResponseEntity<List<Veiculo>> addVeiculos(@RequestBody VeiculoDTO veiculoDto) {
     List<Veiculo> novosVeiculos = (List<Veiculo>) veiculoService.addVeiculo(veiculoDto);
     return ResponseEntity.status(HttpStatus.CREATED).body(novosVeiculos);
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<Veiculo> updateVeiculo(@PathVariable Long id,
+      @RequestBody VeiculoInfoDTO veiculoInfoDto) {
+    Veiculo veiculoAtualizado = veiculoService.updateVeiculo(id, veiculoInfoDto);
+    return ResponseEntity.ok(veiculoAtualizado);
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deleteVeiculo(@PathVariable Long id) {
+    veiculoService.deleteVeiculo(id);
+    return ResponseEntity.noContent().build();
   }
 
 }
