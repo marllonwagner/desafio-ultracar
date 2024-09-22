@@ -28,4 +28,24 @@ public class ClienteService {
     cliente.setCpf(clienteDto.cpf);
     return clienteRepository.save(cliente);
   }
+
+  public List<Cliente> listarClientes() {
+    return clienteRepository.findAll();
+  }
+
+  public Cliente buscarClientePorId(Long id) {
+    return clienteRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+  }
+
+  public Cliente atualizarCliente(Long id, ClienteDTO clienteDto) {
+    Cliente cliente = buscarClientePorId(id);
+    cliente.setNome(clienteDto.getNome());
+    cliente.setCpf(clienteDto.getCpf());
+    return clienteRepository.save(cliente);
+  }
+
+  public void deletarCliente(Long id) {
+    clienteRepository.deleteById(id);
+  }
 }
