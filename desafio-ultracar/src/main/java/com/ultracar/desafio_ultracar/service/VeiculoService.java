@@ -1,10 +1,13 @@
 package com.ultracar.desafio_ultracar.service;
 
 import com.ultracar.desafio_ultracar.dto.VeiculoDTO;
+import com.ultracar.desafio_ultracar.dto.VeiculoInfoDTO;
 import com.ultracar.desafio_ultracar.entity.Cliente;
 import com.ultracar.desafio_ultracar.entity.Veiculo;
 import com.ultracar.desafio_ultracar.repository.ClienteRepository;
 import com.ultracar.desafio_ultracar.repository.VeiculoRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,18 +24,20 @@ public class VeiculoService {
   }
 
   public Veiculo addVeiculo(VeiculoDTO veiculoDto) {
-    Veiculo veiculo = new Veiculo();
-    veiculo.setMarca(veiculoDto.getMarca());
-    veiculo.setModelo(veiculoDto.getModelo());
-    veiculo.setAno(veiculoDto.getAno());
-    veiculo.setPlaca(veiculoDto.getPlaca());
+    for (VeiculoInfoDTO veiculoInfo : veiculoDto.getVeiculos()) {
+      Veiculo veiculo = new Veiculo();
+      veiculo.setMarca(veiculoInfo.getMarca());
+      veiculo.setModelo(veiculoInfo.getModelo());
+      veiculo.setAno(veiculoInfo.getAno());
+      veiculo.setPlaca(veiculoInfo.getPlaca());
 
+      Long clienteId = veiculoDto.getCliente_id();
+      Cliente cliente = clienteRepository.findById(clienteId).orElseThrow(() ->
+          new RuntimeException("Cliente não encontrado"));
 
-    Long clienteId = veiculoDto.getCliente_id();
-    clienteRepository.findById(clienteId).orElseThrow(() ->
-        new RuntimeException("Cliente não encontrado"));
-
-
-    return veiculoRepository.save(veiculo);
+      veiculo.setCliente(cliente);
+      veiculoRepository.save(veiculo);
+    }
+    return null;
   }
 }
