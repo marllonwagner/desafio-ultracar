@@ -28,7 +28,9 @@ cd <nome do repositório>
 Inicie os containers com Docker Compose:
 
 docker-compose up --build
+
 A aplicação estará disponível em http://localhost:8080 e o banco de dados PostgreSQL em localhost:5432.
+
 Execute a aplicação.
 
 Considerações Finais
