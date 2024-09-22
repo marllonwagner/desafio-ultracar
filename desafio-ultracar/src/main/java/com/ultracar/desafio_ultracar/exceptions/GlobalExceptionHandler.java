@@ -29,5 +29,11 @@ public class GlobalExceptionHandler {
     return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
   }
 
+  @ExceptionHandler(DataAgendamentoInvalidaException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST) // Define o status HTTP apropriado
+  public ResponseEntity<String> DataAgendamentoInvalidaException(DataAgendamentoInvalidaException ex) {
+    return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+  }
+
 
 }

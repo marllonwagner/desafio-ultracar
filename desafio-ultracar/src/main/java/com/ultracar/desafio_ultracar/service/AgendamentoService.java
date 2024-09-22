@@ -3,9 +3,11 @@ package com.ultracar.desafio_ultracar.service;
 import com.ultracar.desafio_ultracar.dto.AgendamentoDTO;
 import com.ultracar.desafio_ultracar.entity.Agendamento;
 import com.ultracar.desafio_ultracar.entity.Agendamento.StatusAgendamento;
+import com.ultracar.desafio_ultracar.exceptions.DataAgendamentoInvalidaException;
 import com.ultracar.desafio_ultracar.repository.AgendamentoRepository;
 import com.ultracar.desafio_ultracar.repository.ClienteRepository;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,14 +27,20 @@ public class AgendamentoService {
   }
 
   public Agendamento criarAgendamento(AgendamentoDTO agendamentoDto) {
+    LocalDateTime dataAgendamento = agendamentoDto.getDataAgendamento();
+
+    if (dataAgendamento.isBefore(LocalDateTime.now())) {
+      throw new DataAgendamentoInvalidaException("A data do agendamento não pode ser anterior à data atual.");
+    }
+
     Agendamento agendamento = new Agendamento();
     agendamento.setClienteId(agendamentoDto.getClienteId());
-    agendamento.setDataAgendamento(agendamentoDto.getDataAgendamento());
+    agendamento.setDataAgendamento(dataAgendamento);
     agendamento.setDescricaoServico(agendamentoDto.getDescricaoServico());
     agendamento.setStatus(StatusAgendamento.valueOf(agendamentoDto.getStatus().toUpperCase()));
+
     return agendamentoRepository.save(agendamento);
   }
-
   public List<Agendamento> listarAgendamentos() {
     return agendamentoRepository.findAll();
   }

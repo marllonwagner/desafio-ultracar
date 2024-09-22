@@ -4,6 +4,7 @@ import com.ultracar.desafio_ultracar.dto.AgendamentoDTO;
 import com.ultracar.desafio_ultracar.entity.Agendamento;
 import com.ultracar.desafio_ultracar.entity.Agendamento.StatusAgendamento;
 import com.ultracar.desafio_ultracar.service.AgendamentoService;
+import jakarta.validation.Valid;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
