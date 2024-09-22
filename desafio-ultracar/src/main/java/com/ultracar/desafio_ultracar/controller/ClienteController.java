@@ -3,8 +3,8 @@ package com.ultracar.desafio_ultracar.controller;
 import com.ultracar.desafio_ultracar.dto.ClienteDTO;
 import com.ultracar.desafio_ultracar.dto.EnderecoDTO;
 import com.ultracar.desafio_ultracar.entity.Cliente;
-import com.ultracar.desafio_ultracar.entity.Endereco;
 import com.ultracar.desafio_ultracar.service.ClienteService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class ClienteController {
   }
 
   @PostMapping
-  public ResponseEntity<Cliente> criarCliente(@RequestBody ClienteDTO clienteDto) {
+  public ResponseEntity<Cliente> criarCliente(@Valid @RequestBody ClienteDTO clienteDto) {
     Cliente novoCliente = clienteService.salvarCliente(clienteDto);
     return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente);
   }
@@ -42,7 +42,8 @@ public class ClienteController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDto) {
+  public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id,
+    @Valid  @RequestBody ClienteDTO clienteDto) {
     Cliente clienteAtualizado = clienteService.atualizarCliente(id, clienteDto);
     return ResponseEntity.ok(clienteAtualizado);
   }

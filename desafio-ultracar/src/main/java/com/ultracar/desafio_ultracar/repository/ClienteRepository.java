@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-
+  boolean existsByCpf(String cpf); // Método para verificar a existência do CPF
 }

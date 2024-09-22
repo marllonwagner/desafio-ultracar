@@ -4,6 +4,7 @@ import com.ultracar.desafio_ultracar.dto.EnderecoDTO;
 import com.ultracar.desafio_ultracar.entity.Cliente;
 import com.ultracar.desafio_ultracar.entity.Endereco;
 import com.ultracar.desafio_ultracar.entity.Veiculo;
+import com.ultracar.desafio_ultracar.exceptions.CpfDuplicadoException;
 import com.ultracar.desafio_ultracar.repository.ClienteRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,14 @@ public class ClienteService {
   }
 
   public Cliente salvarCliente(ClienteDTO clienteDto) {
+    if (clienteRepository.existsByCpf(clienteDto.getCpf())) {
+      throw new CpfDuplicadoException("CPF já cadastrado!"); // Lança uma exceção se o CPF existir
+    }
     Cliente cliente = new Cliente();
-    Endereco endereco = cepService.obterEnderecoPorCep(clienteDto.cep);
+    Endereco endereco = cepService.obterEnderecoPorCep(clienteDto.getCep());
     cliente.setEndereco(endereco);
-    cliente.setNome(clienteDto.nome);
-    cliente.setCpf(clienteDto.cpf);
+    cliente.setNome(clienteDto.getNome());
+    cliente.setCpf(clienteDto.getCpf());
     return clienteRepository.save(cliente);
   }
 

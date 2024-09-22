@@ -41,14 +41,6 @@ public class AgendamentoController {
     return ResponseEntity.ok(agendamento);
   }
 
-//  @GetMapping("/cliente/{clienteId}")
-//  public ResponseEntity<List<Agendamento>> buscarAgendamentosPorClienteId(@PathVariable Long clienteId) {
-//    List<Agendamento> agendamentos = agendamentoService.buscarAgendamentosPorClienteId(clienteId);
-//    if (agendamentos.isEmpty()) {
-//      return ResponseEntity.noContent().build();
-//    }
-//    return ResponseEntity.ok(agendamentos);
-//  }
   @GetMapping("/cliente/{clienteId}")
   public ResponseEntity<List<Agendamento>> buscarAgendamentosFiltrados(
       @PathVariable Long clienteId,

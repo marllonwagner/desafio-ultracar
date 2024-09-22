@@ -4,6 +4,7 @@ import com.ultracar.desafio_ultracar.dto.VeiculoDTO;
 import com.ultracar.desafio_ultracar.dto.VeiculoInfoDTO;
 import com.ultracar.desafio_ultracar.entity.Veiculo;
 import com.ultracar.desafio_ultracar.service.VeiculoService;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,14 +23,14 @@ public class VeiculoController {
   }
 
   @PostMapping
-  public ResponseEntity<List<Veiculo>> addVeiculos(@RequestBody VeiculoDTO veiculoDto) {
+  public ResponseEntity<List<Veiculo>> addVeiculos(@Valid @RequestBody VeiculoDTO veiculoDto) {
     List<Veiculo> novosVeiculos = (List<Veiculo>) veiculoService.addVeiculo(veiculoDto);
     return ResponseEntity.status(HttpStatus.CREATED).body(novosVeiculos);
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<Veiculo> updateVeiculo(@PathVariable Long id,
-      @RequestBody VeiculoInfoDTO veiculoInfoDto) {
+    @Valid  @RequestBody VeiculoInfoDTO veiculoInfoDto) {
     Veiculo veiculoAtualizado = veiculoService.updateVeiculo(id, veiculoInfoDto);
     return ResponseEntity.ok(veiculoAtualizado);
   }
