@@ -1,7 +1,9 @@
 package com.ultracar.desafio_ultracar.controller;
 
 import com.ultracar.desafio_ultracar.dto.ClienteDTO;
+import com.ultracar.desafio_ultracar.dto.EnderecoDTO;
 import com.ultracar.desafio_ultracar.entity.Cliente;
+import com.ultracar.desafio_ultracar.entity.Endereco;
 import com.ultracar.desafio_ultracar.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,9 +49,9 @@ public class ClienteController {
 
   @PutMapping("/{id}/endereco")
   public ResponseEntity<Cliente> atualizarEnderecoCliente(@PathVariable Long id,
-      @RequestBody ClienteDTO clienteDto) {
-    Cliente clienteAtualizado = clienteService.atualizarCliente(id, clienteDto);
-    return ResponseEntity.ok(clienteAtualizado);
+      @RequestBody EnderecoDTO enderecoDto) {
+    Cliente enderecoAtualizado = clienteService.atualizarEnderecoCliente(id, enderecoDto);
+    return ResponseEntity.ok(enderecoAtualizado);
   }
 
   @DeleteMapping("/{id}")

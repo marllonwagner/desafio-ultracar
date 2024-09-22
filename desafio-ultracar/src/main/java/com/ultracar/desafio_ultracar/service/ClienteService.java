@@ -1,5 +1,6 @@
 package com.ultracar.desafio_ultracar.service;
 import com.ultracar.desafio_ultracar.dto.ClienteDTO;
+import com.ultracar.desafio_ultracar.dto.EnderecoDTO;
 import com.ultracar.desafio_ultracar.entity.Cliente;
 import com.ultracar.desafio_ultracar.entity.Endereco;
 import com.ultracar.desafio_ultracar.entity.Veiculo;
@@ -44,6 +45,20 @@ public class ClienteService {
     cliente.setCpf(clienteDto.getCpf());
     return clienteRepository.save(cliente);
   }
+
+  public Cliente atualizarEnderecoCliente(Long id, EnderecoDTO enderecoDto) {
+    Cliente cliente = buscarClientePorId(id);
+    Endereco endereco = new Endereco();
+    endereco.setBairro(enderecoDto.getBairro());
+    endereco.setCep(enderecoDto.getCep());
+    endereco.setEstado(enderecoDto.getEstado());
+    endereco.setUf(enderecoDto.getUf());
+    endereco.setLogradouro(enderecoDto.getLogradouro());
+    endereco.setLocalidade(enderecoDto.getLocalidade());
+    cliente.setEndereco(endereco);
+    return clienteRepository.save(cliente);
+  }
+
 
   public void deletarCliente(Long id) {
     clienteRepository.deleteById(id);
