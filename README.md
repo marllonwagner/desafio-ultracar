@@ -4,7 +4,7 @@ Este projeto é uma aplicação desenvolvida com Spring Boot, que utiliza Postgr
 
 Requisitos
 
-Antes de executar o projeto, certifique-se de que você tem o Dockker Instalado.
+Antes de executar o projeto, certifique-se de que você tem o Docker Instalado.
 
 
 Estrutura do Projeto
